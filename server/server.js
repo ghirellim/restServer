@@ -8,7 +8,10 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 // parse application/json
 app.use(bodyParser.json())
-app.use(require('./routes/usuario'));
+
+// Configuracion de rutas
+app.use(require('./routes/index'));
+
 app.get('/usuario/:id', function(req, res) {
     let id = req.params.id;
     res.json({
