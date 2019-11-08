@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
 const app = express();
+const path = require('path');
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -11,6 +12,9 @@ app.use(bodyParser.json())
 
 // Configuracion de rutas
 app.use(require('./routes/index'));
+
+//Habilitar la carpeta public
+app.use(express.static(path.resolve(__dirname, '../public')));
 
 app.get('/usuario/:id', function(req, res) {
     let id = req.params.id;
@@ -42,6 +46,6 @@ mongoose.connect(process.env.URLDB, { useNewUrlParser: true, useCreateIndex: tru
     });
 
 app.listen(process.env.PORT, () => {
-    console.log('Ecuchando en el puerto: ', process.env.PORT);
+    console.log('Escuchando en el puerto: ', process.env.PORT);
     console.log('Conectado a mongo:', process.env.URLDB);
 });
